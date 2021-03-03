@@ -9,15 +9,15 @@ import java.util.*;
 
 import static javafx.application.Application.launch;
 
-public class Main {
+public class Main extends Application {
 
-//    @Override
-//    public void start(Stage primaryStage) throws Exception{
-//        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-//        primaryStage.setTitle("Bitcoin Clicker");
-//        primaryStage.setScene(new Scene(root, 300, 275));
-//        primaryStage.show();
-//    }
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        primaryStage.setTitle("Bitcoin Clicker");
+        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.show();
+    }
     //Variabler
     private double totalBitcoins;
     private double bitcoinsPerSec = 1;
@@ -65,15 +65,16 @@ public class Main {
         TimerTask updateRate = new TimerTask() {
             @Override
             public void run() {
-                setTotalBitcoins(getTotalBitcoins()+getBitcoinsPerSec());
+                setTotalBitcoins(getTotalBitcoins()+(getBitcoinsPerSec()/50));
+
             }
         };
 
-        timer.schedule(updateRate, 0, 1000);
+        timer.schedule(updateRate, 0, 20);
     }
 
     public static void main(String[] args) {
-        //launch(args);
+        launch(args);
         Main test = new Main();
     }
 }
