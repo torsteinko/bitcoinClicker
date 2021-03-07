@@ -66,10 +66,8 @@ public class Main extends Application {
             @Override
             public void run() {
                 setTotalBitcoins(getTotalBitcoins()+(getBitcoinsPerSec()/50));
-
             }
         };
-
         timer.schedule(updateRate, 0, 20);
     }
 

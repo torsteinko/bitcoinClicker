@@ -52,12 +52,19 @@ public class Shop extends Main {
     }
 
     // Oppdaterer bitcoinsShopPerSec
-    public void updatePerSec(double addToPerSec) {
-        setBitcoinsShopPerSec(getBitcoinsShopPerSec()+addToPerSec);
+    public void updateShopPerSec() {
+        double abakusTotalPerSec = ABAKUS_PER_SEC*abakusCount;
+        double pascalineTotalPerSec = PASCALINE_PER_SEC*pascalineCount;
+        double eniacTotalPerSec = ENIAC_PER_SEC*eniacCount;
+        double tradicTotalPerSec = TRADIC_PER_SEC*tradicCount;
+        double appleIITotalPerSec = APPLEII_PER_SEC*appleIICount;
+        double commodore64TotalPerSec = COMMODORE64_PER_SEC*commodore64Count;
+        double appleMacintoshTotalPerSec = APPLEMACINTOSH_PER_SEC*appleMacintoshCount;
+        setBitcoinsShopPerSec(abakusTotalPerSec+pascalineTotalPerSec+eniacTotalPerSec+tradicTotalPerSec+appleIITotalPerSec+commodore64TotalPerSec+appleMacintoshTotalPerSec);
     }
 
     // Oppdaterer prisen for oppgraderinger
-    public void updatePrice() {
+    public void updateShopPrice() {
         this.abakusPrice = ABAKUS_START_PRICE*(Math.pow(1.15,abakusCount));
         this.pascalinePrice = PASCALINE_START_PRICE*(Math.pow(1.15,pascalineCount));
         this.eniacPrice = ENIAC_START_PRICE*(Math.pow(1.15,eniacPrice));
@@ -65,6 +72,13 @@ public class Shop extends Main {
         this.appleIIPrice = APPLEII_START_PRICE*(Math.pow(1.15,appleIICount));
         this.commodore64Price = COMMODORE64_START_PRICE*(Math.pow(1.15,commodore64Count));
         this.appleMacintoshPrice = APPLEMACINTOSH_START_PRICE*(Math.pow(1.15,appleMacintoshCount));
+    }
+
+    //Kaller på funksjoner som oppdaterer felter etter kjøp
+    public void updateShopAtBuy() {
+        updateShopPrice();
+        updateShopPerSec();
+        updateMainBitcoinPerSec();
     }
 
     // Oppdater main bitcoinPerSec funksjon
@@ -75,51 +89,37 @@ public class Shop extends Main {
     // Kjøp funksjoner
     public void buyAbakus() {
         abakusCount++;
-        updatePrice();
-        updatePerSec(ABAKUS_PER_SEC);
-        updateMainBitcoinPerSec();
+        updateShopAtBuy();
     }
 
     public void buyPascaline() {
         pascalineCount++;
-        updatePrice();
-        updatePerSec(PASCALINE_PER_SEC);
-        updateMainBitcoinPerSec();
+        updateShopAtBuy();
     }
 
     public void buyEniac() {
         eniacCount++;
-        updatePrice();
-        updatePerSec(ENIAC_PER_SEC);
-        updateMainBitcoinPerSec();
+        updateShopAtBuy();
     }
 
     public void buyTradic() {
         tradicCount++;
-        updatePrice();
-        updatePerSec(TRADIC_PER_SEC);
-        updateMainBitcoinPerSec();
+        updateShopAtBuy();
     }
 
     public void buyAppleII() {
         appleIICount++;
-        updatePrice();
-        updatePerSec(APPLEII_PER_SEC);
-        updateMainBitcoinPerSec();
+        updateShopAtBuy();
     }
 
     public void buyCommodore64() {
         commodore64Count++;
-        updatePrice();
-        updatePerSec(COMMODORE64_PER_SEC);
-        updateMainBitcoinPerSec();
+        updateShopAtBuy();
     }
 
     public void buyAppleMacintosh() {
         appleMacintoshCount++;
-        updatePrice();
-        updatePerSec(APPLEMACINTOSH_PER_SEC);
-        updateMainBitcoinPerSec();
+        updateShopAtBuy();
     }
 
 }
