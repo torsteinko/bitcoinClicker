@@ -1,4 +1,9 @@
 package sample;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 import java.lang.Math;
 
 public class Shop extends Main {
@@ -88,38 +93,59 @@ public class Shop extends Main {
 
     // Kjøp funksjoner
     public void buyAbakus() {
-        abakusCount++;
-        updateShopAtBuy();
+        if (getTotalBitcoins() >= abakusPrice) {
+            abakusCount++;
+            setTotalBitcoins(getTotalBitcoins()-abakusPrice);
+            updateShopAtBuy();
+        }
     }
 
     public void buyPascaline() {
-        pascalineCount++;
-        updateShopAtBuy();
+        if (getTotalBitcoins() >= pascalinePrice) {
+            pascalineCount++;
+            setTotalBitcoins(getTotalBitcoins()-pascalinePrice);
+            updateShopAtBuy();
+        }
     }
 
     public void buyEniac() {
-        eniacCount++;
-        updateShopAtBuy();
+        if (getTotalBitcoins() >= eniacPrice) {
+            eniacCount++;
+            setTotalBitcoins(getTotalBitcoins()-eniacPrice);
+            updateShopAtBuy();
+        }
     }
 
     public void buyTradic() {
-        tradicCount++;
-        updateShopAtBuy();
+        if (getTotalBitcoins() >= tradicPrice) {
+            tradicCount++;
+            setTotalBitcoins(getTotalBitcoins() - tradicPrice);
+            updateShopAtBuy();
+        }
     }
 
     public void buyAppleII() {
-        appleIICount++;
-        updateShopAtBuy();
+        if (getTotalBitcoins() >= appleIIPrice) {
+            appleIICount++;
+            setTotalBitcoins(getTotalBitcoins() - appleIIPrice);
+            updateShopAtBuy();
+        }
     }
 
     public void buyCommodore64() {
-        commodore64Count++;
-        updateShopAtBuy();
+        if (getTotalBitcoins() >= commodore64Price) {
+            commodore64Count++;
+            setTotalBitcoins(getTotalBitcoins() - commodore64Price);
+            updateShopAtBuy();
+        }
     }
 
     public void buyAppleMacintosh() {
-        appleMacintoshCount++;
-        updateShopAtBuy();
+        if (getTotalBitcoins() >= appleMacintoshPrice) {
+            appleMacintoshCount++;
+            setTotalBitcoins(getTotalBitcoins() - appleMacintoshPrice);
+            updateShopAtBuy();
+        }
     }
 
 }

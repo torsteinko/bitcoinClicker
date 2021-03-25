@@ -13,54 +13,63 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class Controller{
+public class Controller {
 
-    Main clicker;
     Shop shop;
 
     @FXML
     Text counterOutput;
+    @FXML
+    Text perSecDisplay;
 
     @FXML
     void initialize() {
-        clicker = new Main();
         shop = new Shop();
         updateGUI();
+        shop.updateShopAtBuy();
+        perSecDisplay.setText(String.format("%.1f BTCs/s", shop.getBitcoinsPerSec()));
     }
 
     @FXML
     void countAction() {
-        clicker.bitcoinOnClick();
-        counterOutput.setText(String.format("%.0f BTCs", clicker.getTotalBitcoins()));
+        shop.bitcoinOnClick();
+        counterOutput.setText(String.format("%.0f BTCs", shop.getTotalBitcoins()));
     }
 
     @FXML
     void buyAbakusAction() {
         shop.buyAbakus();
+        perSecDisplay.setText(String.format("%.1f BTCs/s", shop.getBitcoinsPerSec()));
     }
     @FXML
     void buyPascalineAction() {
         shop.buyPascaline();
+        perSecDisplay.setText(String.format("%.1f BTCs/s", shop.getBitcoinsPerSec()));
     }
     @FXML
     void buyENIACAction() {
         shop.buyEniac();
+        perSecDisplay.setText(String.format("%.1f BTCs/s", shop.getBitcoinsPerSec()));
     }
     @FXML
     void buyTRADICAction() {
         shop.buyTradic();
+        perSecDisplay.setText(String.format("%.1f BTCs/s", shop.getBitcoinsPerSec()));
     }
     @FXML
     void buyAppleIIAction() {
         shop.buyAppleII();
+        perSecDisplay.setText(String.format("%.1f BTCs/s", shop.getBitcoinsPerSec()));
     }
     @FXML
     void buyCommodore64Action() {
         shop.buyCommodore64();
+        perSecDisplay.setText(String.format("%.1f BTCs/s", shop.getBitcoinsPerSec()));
     }
     @FXML
     void buyAppleMacintoshAction() {
         shop.buyAppleMacintosh();
+        perSecDisplay.setText(String.format("%.1f BTCs/s", shop.getBitcoinsPerSec()));
     }
 
     @FXML
@@ -74,7 +83,7 @@ public class Controller{
 
                     @Override
                     public void run() {
-                        counterOutput.setText(String.format("%.0f BTCs", clicker.getTotalBitcoins()));
+                        counterOutput.setText(String.format("%.0f BTCs", shop.getTotalBitcoins()));
                     }
                 });
             }

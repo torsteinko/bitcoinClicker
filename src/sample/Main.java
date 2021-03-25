@@ -22,7 +22,7 @@ public class Main extends Application {
     }
     //Variabler
     private double totalBitcoins;
-    private double bitcoinsPerSec = 1;
+    private double bitcoinsPerSec;
     private int bitcoinsPerClick = 1;
 
     //Konstruktør
@@ -75,6 +75,5 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
-        Main test = new Main();
     }
 }
