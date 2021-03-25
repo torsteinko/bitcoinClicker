@@ -2,15 +2,21 @@ package sample;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class Controller {
+public class Controller{
 
     Main clicker;
+    Shop shop;
 
     @FXML
     Text counterOutput;
@@ -18,13 +24,43 @@ public class Controller {
     @FXML
     void initialize() {
         clicker = new Main();
+        shop = new Shop();
         updateGUI();
     }
 
     @FXML
     void countAction() {
         clicker.bitcoinOnClick();
-        counterOutput.setText(String.format("Antall bitcoins: %.0f", clicker.getTotalBitcoins()));
+        counterOutput.setText(String.format("%.0f BTCs", clicker.getTotalBitcoins()));
+    }
+
+    @FXML
+    void buyAbakusAction() {
+        shop.buyAbakus();
+    }
+    @FXML
+    void buyPascalineAction() {
+        shop.buyPascaline();
+    }
+    @FXML
+    void buyENIACAction() {
+        shop.buyEniac();
+    }
+    @FXML
+    void buyTRADICAction() {
+        shop.buyTradic();
+    }
+    @FXML
+    void buyAppleIIAction() {
+        shop.buyAppleII();
+    }
+    @FXML
+    void buyCommodore64Action() {
+        shop.buyCommodore64();
+    }
+    @FXML
+    void buyAppleMacintoshAction() {
+        shop.buyAppleMacintosh();
     }
 
     @FXML
@@ -38,7 +74,7 @@ public class Controller {
 
                     @Override
                     public void run() {
-                        counterOutput.setText(String.format("Antall bitcoins: %.0f", clicker.getTotalBitcoins()));
+                        counterOutput.setText(String.format("%.0f BTCs", clicker.getTotalBitcoins()));
                     }
                 });
             }
@@ -46,6 +82,5 @@ public class Controller {
 
         timer.schedule(updateRate, 0, 20);
     }
-
 }
 
