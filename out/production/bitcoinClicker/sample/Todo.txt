@@ -1,0 +1,6 @@
+TODO-List
+
+Integrere shop i GUI
+Filbehandling (egen klasse) (Autosave kvart 1 min + manuell save)
+Pusse opp GUI
+
