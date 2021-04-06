@@ -30,7 +30,7 @@
             </Text>
             <Button alignment="CENTER" ellipsisString="" layoutX="58.0" layoutY="150.0" maxHeight="180.0" maxWidth="180.0" minHeight="180.0" minWidth="180.0" mnemonicParsing="false" onAction="#countAction" prefHeight="180.0" prefWidth="180.0" style="-fx-background-radius: 1000;" text="Klikk" textOverrun="CLIP">
                <graphic>
-                  <ImageView id="bitcoinKnapp" fitHeight="180.0" fitWidth="213.0" onKeyPressed="#countAction" pickOnBounds="true" preserveRatio="true">
+                  <ImageView id="bitcoinKnapp" fitHeight="180.0" fitWidth="213.0" onKeyPressed="#countAction" pickOnBounds="true" preserveRatio="true" rotate="12.0">
                      <image>
                         <Image url="@bitcoin.png" />
                      </image>
@@ -62,7 +62,7 @@
                                     <Font name="Lucida Fax Regular" size="12.0" />
                                  </font>
                               </Text>
-                            <Button fx:id="abakusButtonBuy" mnemonicParsing="false" onAction="#buyAbakusAction" text="Buy" />
+                            <Button fx:id="abakusButtonBuy" mnemonicParsing="false" onAction="#buyAbakusAction" text="0" />
                           </buttons>
                         </ButtonBar>
                         <ButtonBar layoutX="-18.0" layoutY="40.0" prefHeight="40.0" prefWidth="260.0">
@@ -73,7 +73,7 @@
                                     <Font name="Lucida Fax Regular" size="12.0" />
                                  </font>
                               </Text>
-                            <Button fx:id="pascalineButtonBuy" mnemonicParsing="false" onAction="#buyPascalineAction" text="Buy" />
+                            <Button fx:id="pascalineButtonBuy" mnemonicParsing="false" onAction="#buyPascalineAction" text="0" />
                           </buttons>
                         </ButtonBar>
                         <ButtonBar layoutX="-18.0" layoutY="80.0" prefHeight="40.0" prefWidth="260.0">
@@ -173,6 +173,17 @@
             <Text layoutX="552.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" />
             <Text layoutX="448.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item" />
             <Text layoutX="384.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Qt." />
+            <ImageView fitHeight="47.0" fitWidth="73.0" layoutX="58.0" layoutY="374.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@cursor.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="100.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" fx:id="cursorLevelCount" text="Level: 1" wrappingWidth="70.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Button layoutX="190.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="93.0" onAction="#buyCursorAction" fx:id="cursorUpgradeButton" text="0" />
          </children>
       </AnchorPane>
    </children>

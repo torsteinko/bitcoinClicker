@@ -7,11 +7,11 @@ import javafx.scene.text.Text;
 
 import java.util.Timer;
 import java.util.TimerTask;
-
+import java.util.concurrent.TimeUnit;
 
 public class Controller {
 
-    Shop shop;
+    Main main;
 
     //FXML
     @FXML
@@ -33,6 +33,10 @@ public class Controller {
     @FXML
     Text appleMacintoshCountField;
     @FXML
+    Text cursorLevelCount;
+    @FXML
+    Button cursorUpgradeButton;
+    @FXML
     Button abakusButtonBuy;
     @FXML
     Button pascalineButtonBuy;
@@ -50,8 +54,8 @@ public class Controller {
     //Initialiserer viktige
     @FXML
     void initialize() {
-        shop = new Shop();
-        shop.updateShopAtBuy();
+        main = new Main();
+        main.shop.updateShopAtBuy();
         updateGUI();
         updateFields();
     }
@@ -59,67 +63,75 @@ public class Controller {
     //Funksjon som knyttes til klikk på bitcoin i GUI
     @FXML
     void countAction() {
-        shop.bitcoinOnClick();
-        counterOutput.setText(String.format("%.0f BTCs", shop.getTotalBitcoins()));
+        main.shop.bitcoinOnClick();
+        counterOutput.setText(String.format("%.1f BTCs", main.shop.getTotalBitcoins()));
     }
 
     //Kjøp funksjoner som knyttes til knapper i GUI
     @FXML
+    void buyCursorAction() {
+        main.shop.buyCursor();
+        updateFields();
+    }
+    @FXML
     void buyAbakusAction() {
-        shop.buyAbakus();
+        main.shop.buyAbakus();
         updateFields();
     }
     @FXML
     void buyPascalineAction() {
-        shop.buyPascaline();
+        main.shop.buyPascaline();
         updateFields();
     }
     @FXML
     void buyENIACAction() {
-        shop.buyEniac();
+        main.shop.buyEniac();
         updateFields();
     }
     @FXML
     void buyTRADICAction() {
-        shop.buyTradic();
+        main.shop.buyTradic();
         updateFields();
     }
     @FXML
     void buyAppleIIAction() {
-        shop.buyAppleII();
+        main.shop.buyAppleII();
         updateFields();
     }
     @FXML
     void buyCommodore64Action() {
-        shop.buyCommodore64();
+        main.shop.buyCommodore64();
         updateFields();
     }
     @FXML
     void buyAppleMacintoshAction() {
-        shop.buyAppleMacintosh();
+        main.shop.buyAppleMacintosh();
 
     }
 
     //Oppdaterer tekstfelt som ikkje må oppdateres kontinuerlig (BTCs/s og knapper)
     void updateFields() {
         //Oppdaterer per sec
-        perSecDisplay.setText(String.format("%.1f BTCs/s", shop.getBitcoinsPerSec()));
+        perSecDisplay.setText(String.format("%.1f BTCs/s", main.shop.getBitcoinsPerSec()));
         //Oppdaterer pris
-        abakusButtonBuy.setText(String.format("%.0f", shop.getAbakusPrice()));
-        pascalineButtonBuy.setText(String.format("%.0f", shop.getPascalinePrice()));
-        eniacButtonBuy.setText(String.format("%.0f", shop.getEniacPrice()));
-        tradicButtonBuy.setText(String.format("%.0f", shop.getTradicPrice()));
-        appleIIButtonBuy.setText(String.format("%.0f", shop.getAppleIIPrice()));
-        commodore64ButtonBuy.setText(String.format("%.0f", shop.getCommodore64Price()));
-        appleMacintoshButtonBuy.setText(String.format("%.0f", shop.getAppleMacintoshPrice()));
+        cursorUpgradeButton.setText(String.format("%.0f",main.shop.getCursorPrice()));
+        abakusButtonBuy.setText(String.format("%.0f", main.shop.getAbakusPrice()));
+        pascalineButtonBuy.setText(String.format("%.0f", main.shop.getPascalinePrice()));
+        eniacButtonBuy.setText(String.format("%.0f", main.shop.getEniacPrice()));
+        tradicButtonBuy.setText(String.format("%.0f",main.shop.getTradicPrice()));
+        appleIIButtonBuy.setText(String.format("%.0f", main.shop.getAppleIIPrice()));
+        commodore64ButtonBuy.setText(String.format("%.0f", main.shop.getCommodore64Price()));
+        appleMacintoshButtonBuy.setText(String.format("%.0f", main.shop.getAppleMacintoshPrice()));
         //Oppdaterer count
-        abakusCountField.setText(String.format("%d",shop.getAbakusCount()));
-        pascalineCountField.setText(String.format("%d",shop.getPascalineCount()));
-        eniacCountField.setText(String.format("%d",shop.getEniacCount()));
-        tradicCountField.setText(String.format("%d",shop.getTradicCount()));
-        appleIICountField.setText(String.format("%d",shop.getAppleIICount()));
-        commodore64CountField.setText(String.format("%d",shop.getCommodore64Count()));
-        appleMacintoshCountField.setText(String.format("%d",shop.getAppleMacintoshCount()));
+        cursorLevelCount.setText(String.format("Level: %d",main.shop.getCursorLevelCount()));
+        abakusCountField.setText(String.format("%d",main.shop.getAbakusCount()));
+        pascalineCountField.setText(String.format("%d",main.shop.getPascalineCount()));
+        eniacCountField.setText(String.format("%d",main.shop.getEniacCount()));
+        tradicCountField.setText(String.format("%d",main.shop.getTradicCount()));
+        appleIICountField.setText(String.format("%d",main.shop.getAppleIICount()));
+        commodore64CountField.setText(String.format("%d",main.shop.getCommodore64Count()));
+        appleMacintoshCountField.setText(String.format("%d",main.shop.getAppleMacintoshCount()));
+
     }
 
     //Oppdaterer felt som må oppdateres kontinuerlig (Total bitcoins)
@@ -134,7 +146,7 @@ public class Controller {
 
                     @Override
                     public void run() {
-                        counterOutput.setText(String.format("%.0f BTCs", shop.getTotalBitcoins()));
+                        counterOutput.setText(String.format("%.1f BTCs", main.shop.getTotalBitcoins()));
                     }
                 });
             }
