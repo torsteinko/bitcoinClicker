@@ -5,9 +5,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.io.Serializable;
 import java.util.*;
 
-public class Main extends Application {
+public class Main extends Application implements Serializable {
+
+    Shop shop = new Shop();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
