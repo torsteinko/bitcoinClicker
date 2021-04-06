@@ -4,12 +4,13 @@ import java.io.*;
 
 public class SaveHandler {
 
-    public static void writeToFile(Object object) {
+    public static void writeToFile(Main main) {
         try {
-            FileOutputStream f = new FileOutputStream(new File("src/sample/data.txt"));
+            FileOutputStream f = new FileOutputStream(("src/sample/data.ser"));
             ObjectOutputStream o = new ObjectOutputStream(f);
 
-            o.writeObject(object);
+            o.writeObject(main);
+            o.flush();
 
             o.close();
             f.close();
@@ -21,17 +22,17 @@ public class SaveHandler {
 
     }
 
-    public static Object readFromFile(String filename) {
+    public static Object readFromFile() {
         try {
-            FileInputStream f = new FileInputStream((filename));
+            FileInputStream f = new FileInputStream(("src/sample/data.ser"));
             ObjectInputStream o = new ObjectInputStream(f);
 
-            Object obj = o.readObject();
+            Main main = (Main) o.readObject();
 
             o.close();
             f.close();
 
-            return obj;
+            return main;
 
         } catch (FileNotFoundException e) {
         System.out.println("File not found");

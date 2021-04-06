@@ -1,6 +1,9 @@
 TODO-List
 
-Filbehandling (egen klasse) (Autosave kvart 1 min + manuell save)
+Filbehandling:
+- Finne path sjølv
+- Opprette fil om den ikkje er der fra før
 
 Pusse opp GUI
 
+JUnit-tester

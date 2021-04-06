@@ -7,11 +7,10 @@ import javafx.scene.text.Text;
 
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
 
 public class Controller {
 
-    Main main;
+    private static Main main = new Main();
 
     //FXML
     @FXML
@@ -54,8 +53,8 @@ public class Controller {
     //Initialiserer viktige
     @FXML
     void initialize() {
-        main = new Main();
-        main.shop.updateShopAtBuy();
+        main.updateShopAtBuy();
+        main.timerUpdate();
         updateGUI();
         updateFields();
     }
@@ -63,74 +62,74 @@ public class Controller {
     //Funksjon som knyttes til klikk på bitcoin i GUI
     @FXML
     void countAction() {
-        main.shop.bitcoinOnClick();
-        counterOutput.setText(String.format("%.1f BTCs", main.shop.getTotalBitcoins()));
+        main.bitcoinOnClick();
+        counterOutput.setText(String.format("%.1f BTCs", main.getTotalBitcoins()));
     }
 
     //Kjøp funksjoner som knyttes til knapper i GUI
     @FXML
     void buyCursorAction() {
-        main.shop.buyCursor();
+        main.buyCursor();
         updateFields();
     }
     @FXML
     void buyAbakusAction() {
-        main.shop.buyAbakus();
+        main.buyAbakus();
         updateFields();
     }
     @FXML
     void buyPascalineAction() {
-        main.shop.buyPascaline();
+        main.buyPascaline();
         updateFields();
     }
     @FXML
     void buyENIACAction() {
-        main.shop.buyEniac();
+        main.buyEniac();
         updateFields();
     }
     @FXML
     void buyTRADICAction() {
-        main.shop.buyTradic();
+        main.buyTradic();
         updateFields();
     }
     @FXML
     void buyAppleIIAction() {
-        main.shop.buyAppleII();
+        main.buyAppleII();
         updateFields();
     }
     @FXML
     void buyCommodore64Action() {
-        main.shop.buyCommodore64();
+        main.buyCommodore64();
         updateFields();
     }
     @FXML
     void buyAppleMacintoshAction() {
-        main.shop.buyAppleMacintosh();
+        main.buyAppleMacintosh();
 
     }
 
     //Oppdaterer tekstfelt som ikkje må oppdateres kontinuerlig (BTCs/s og knapper)
     void updateFields() {
         //Oppdaterer per sec
-        perSecDisplay.setText(String.format("%.1f BTCs/s", main.shop.getBitcoinsPerSec()));
+        perSecDisplay.setText(String.format("%.1f BTCs/s", main.getBitcoinsPerSec()));
         //Oppdaterer pris
-        cursorUpgradeButton.setText(String.format("%.0f",main.shop.getCursorPrice()));
-        abakusButtonBuy.setText(String.format("%.0f", main.shop.getAbakusPrice()));
-        pascalineButtonBuy.setText(String.format("%.0f", main.shop.getPascalinePrice()));
-        eniacButtonBuy.setText(String.format("%.0f", main.shop.getEniacPrice()));
-        tradicButtonBuy.setText(String.format("%.0f",main.shop.getTradicPrice()));
-        appleIIButtonBuy.setText(String.format("%.0f", main.shop.getAppleIIPrice()));
-        commodore64ButtonBuy.setText(String.format("%.0f", main.shop.getCommodore64Price()));
-        appleMacintoshButtonBuy.setText(String.format("%.0f", main.shop.getAppleMacintoshPrice()));
+        cursorUpgradeButton.setText(String.format("%.0f", main.getCursorPrice()));
+        abakusButtonBuy.setText(String.format("%.0f", main.getAbakusPrice()));
+        pascalineButtonBuy.setText(String.format("%.0f", main.getPascalinePrice()));
+        eniacButtonBuy.setText(String.format("%.0f", main.getEniacPrice()));
+        tradicButtonBuy.setText(String.format("%.0f", main.getTradicPrice()));
+        appleIIButtonBuy.setText(String.format("%.0f", main.getAppleIIPrice()));
+        commodore64ButtonBuy.setText(String.format("%.0f", main.getCommodore64Price()));
+        appleMacintoshButtonBuy.setText(String.format("%.0f", main.getAppleMacintoshPrice()));
         //Oppdaterer count
-        cursorLevelCount.setText(String.format("Level: %d",main.shop.getCursorLevelCount()));
-        abakusCountField.setText(String.format("%d",main.shop.getAbakusCount()));
-        pascalineCountField.setText(String.format("%d",main.shop.getPascalineCount()));
-        eniacCountField.setText(String.format("%d",main.shop.getEniacCount()));
-        tradicCountField.setText(String.format("%d",main.shop.getTradicCount()));
-        appleIICountField.setText(String.format("%d",main.shop.getAppleIICount()));
-        commodore64CountField.setText(String.format("%d",main.shop.getCommodore64Count()));
-        appleMacintoshCountField.setText(String.format("%d",main.shop.getAppleMacintoshCount()));
+        cursorLevelCount.setText(String.format("Level: %d", main.getCursorLevelCount()));
+        abakusCountField.setText(String.format("%d", main.getAbakusCount()));
+        pascalineCountField.setText(String.format("%d", main.getPascalineCount()));
+        eniacCountField.setText(String.format("%d", main.getEniacCount()));
+        tradicCountField.setText(String.format("%d", main.getTradicCount()));
+        appleIICountField.setText(String.format("%d", main.getAppleIICount()));
+        commodore64CountField.setText(String.format("%d", main.getCommodore64Count()));
+        appleMacintoshCountField.setText(String.format("%d", main.getAppleMacintoshCount()));
 
     }
 
@@ -146,7 +145,8 @@ public class Controller {
 
                     @Override
                     public void run() {
-                        counterOutput.setText(String.format("%.1f BTCs", main.shop.getTotalBitcoins()));
+                        counterOutput.setText(String.format("%.1f BTCs", main.getTotalBitcoins()));
+
                     }
                 });
             }
@@ -154,5 +154,15 @@ public class Controller {
 
         timer.schedule(updateRate, 0, 20);
     }
+
+    //Getters og setters for instansen
+    public static Main getObject() {
+        return main;
+    }
+
+    public static void setObject(Main obj) {
+        main = obj;
+    }
+
 }
 
