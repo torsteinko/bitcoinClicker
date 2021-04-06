@@ -1,10 +1,6 @@
 TODO-List
 
-Integrere shop i GUI:
--Mangler implementere pris på oppgradering og antall kjøpte
--Ellers bra!
-
 Filbehandling (egen klasse) (Autosave kvart 1 min + manuell save)
 
-Pusse opp GUI (Absolutt ikkje ferdig :( )
+Pusse opp GUI
 

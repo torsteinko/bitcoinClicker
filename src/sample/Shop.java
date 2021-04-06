@@ -1,8 +1,4 @@
 package sample;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 import java.lang.Math;
 
@@ -56,6 +52,49 @@ public class Shop extends Main {
         return bitcoinsShopPerSec;
     }
 
+    public double getAbakusPrice() {
+        return(abakusPrice);
+    }
+    public double getPascalinePrice() {
+        return(pascalinePrice);
+    }
+    public double getEniacPrice() {
+        return eniacPrice;
+    }
+    public double getTradicPrice() {
+        return tradicPrice;
+    }
+    public double getAppleIIPrice() {
+        return appleIIPrice;
+    }
+    public double getCommodore64Price() {
+        return commodore64Price;
+    }
+    public double getAppleMacintoshPrice() {
+        return appleMacintoshPrice;
+    }
+    public int getAbakusCount() {
+        return abakusCount;
+    }
+    public int getPascalineCount() {
+        return pascalineCount;
+    }
+    public int getEniacCount() {
+        return eniacCount;
+    }
+    public int getTradicCount() {
+        return tradicCount;
+    }
+    public int getAppleIICount() {
+        return appleIICount;
+    }
+    public int getCommodore64Count() {
+        return commodore64Count;
+    }
+    public int getAppleMacintoshCount() {
+        return appleMacintoshCount;
+    }
+
     // Oppdaterer bitcoinsShopPerSec
     public void updateShopPerSec() {
         double abakusTotalPerSec = ABAKUS_PER_SEC*abakusCount;
@@ -72,8 +111,8 @@ public class Shop extends Main {
     public void updateShopPrice() {
         this.abakusPrice = ABAKUS_START_PRICE*(Math.pow(1.15,abakusCount));
         this.pascalinePrice = PASCALINE_START_PRICE*(Math.pow(1.15,pascalineCount));
-        this.eniacPrice = ENIAC_START_PRICE*(Math.pow(1.15,eniacPrice));
-        this.tradicPrice = TRADIC_START_PRICE*(Math.pow(1.15,tradicPrice));
+        this.eniacPrice = ENIAC_START_PRICE*(Math.pow(1.15,eniacCount));
+        this.tradicPrice = TRADIC_START_PRICE*(Math.pow(1.15,tradicCount));
         this.appleIIPrice = APPLEII_START_PRICE*(Math.pow(1.15,appleIICount));
         this.commodore64Price = COMMODORE64_START_PRICE*(Math.pow(1.15,commodore64Count));
         this.appleMacintoshPrice = APPLEMACINTOSH_START_PRICE*(Math.pow(1.15,appleMacintoshCount));

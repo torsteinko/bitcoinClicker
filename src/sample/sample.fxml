@@ -21,7 +21,7 @@
       <RowConstraints maxHeight="Infinity" minHeight="480.0" prefHeight="480.0" />
    </rowConstraints>
    <children>
-      <AnchorPane minHeight="480.0" minWidth="640.0" style="-fx-background-color: grey;" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+      <AnchorPane minHeight="480.0" minWidth="640.0" prefHeight="563.0" prefWidth="640.0" style="-fx-background-color: grey;" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
          <children>
             <Text id="antallBitcoins" fx:id="counterOutput" layoutX="45.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0 BTCs" textAlignment="CENTER" wrappingWidth="205.14794921875">
                <font>
@@ -45,112 +45,124 @@
                   <Font name="Lucida Fax Regular" size="12.0" />
                </font>
             </Text>
-            <Text layoutX="490.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shop">
+            <Text layoutX="473.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shop">
                <font>
                   <Font name="Lucida Fax Regular" size="25.0" />
                </font>
             </Text>
-            <ScrollPane hbarPolicy="NEVER" layoutX="389.0" layoutY="111.0" prefHeight="300.0" prefWidth="242.0" style="-fx-background-color: grey;" vbarPolicy="ALWAYS">
+            <ScrollPane hbarPolicy="NEVER" layoutX="371.0" layoutY="112.0" prefHeight="285.0" prefWidth="260.0" style="-fx-background-color: grey;" vbarPolicy="ALWAYS">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="488.0" prefWidth="242.0" style="-fx-background-color: grey;">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="509.0" prefWidth="266.0" style="-fx-background-color: grey;">
                      <children>
-                        <ButtonBar prefHeight="40.0" prefWidth="225.0">
+                        <ButtonBar layoutX="-18.0" prefHeight="40.0" prefWidth="260.0">
                           <buttons>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Abakus" wrappingWidth="95.0" >
+                              <Text fx:id="abakusCountField" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="25.0" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Abacus" textAlignment="CENTER" wrappingWidth="95.0">
                                  <font>
                                     <Font name="Lucida Fax Regular" size="12.0" />
                                  </font>
                               </Text>
-                            <Button mnemonicParsing="false" text="Buy" onAction="#buyAbakusAction" />
+                            <Button fx:id="abakusButtonBuy" mnemonicParsing="false" onAction="#buyAbakusAction" text="Buy" />
                           </buttons>
                         </ButtonBar>
-                        <ButtonBar layoutY="40.0" prefHeight="40.0" prefWidth="225.0">
+                        <ButtonBar layoutX="-18.0" layoutY="40.0" prefHeight="40.0" prefWidth="260.0">
                           <buttons>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pascaline" wrappingWidth="95.0">
+                              <Text fx:id="pascalineCountField" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="25.0" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pascaline" textAlignment="CENTER" wrappingWidth="95.0">
                                  <font>
                                     <Font name="Lucida Fax Regular" size="12.0" />
                                  </font>
                               </Text>
-                            <Button mnemonicParsing="false" text="Buy" onAction="#buyPascalineAction" />
+                            <Button fx:id="pascalineButtonBuy" mnemonicParsing="false" onAction="#buyPascalineAction" text="Buy" />
                           </buttons>
                         </ButtonBar>
-                        <ButtonBar layoutY="80.0" prefHeight="40.0" prefWidth="225.0">
+                        <ButtonBar layoutX="-18.0" layoutY="80.0" prefHeight="40.0" prefWidth="260.0">
                           <buttons>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ENIAC" wrappingWidth="95.0">
+                              <Text fx:id="eniacCountField" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="25.0" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ENIAC" textAlignment="CENTER" wrappingWidth="95.0">
                                  <font>
                                     <Font name="Lucida Fax Regular" size="12.0" />
                                  </font>
                               </Text>
-                            <Button mnemonicParsing="false" text="Buy" onAction="#buyENIACAction"/>
+                            <Button fx:id="eniacButtonBuy" mnemonicParsing="false" onAction="#buyENIACAction" text="Buy" />
                           </buttons>
                         </ButtonBar>
-                        <ButtonBar layoutY="120.0" prefHeight="40.0" prefWidth="225.0">
+                        <ButtonBar layoutX="-18.0" layoutY="120.0" prefHeight="40.0" prefWidth="260.0">
                           <buttons>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TRADIC" wrappingWidth="95.0">
+                              <Text fx:id="tradicCountField" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="25.0" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TRADIC" textAlignment="CENTER" wrappingWidth="95.0">
                                  <font>
                                     <Font name="Lucida Fax Regular" size="12.0" />
                                  </font>
                               </Text>
-                            <Button mnemonicParsing="false" text="Buy" onAction="#buyTRADICAction"/>
+                            <Button fx:id="tradicButtonBuy" mnemonicParsing="false" onAction="#buyTRADICAction" text="Buy" />
                           </buttons>
                         </ButtonBar>
-                        <ButtonBar layoutY="160.0" prefHeight="40.0" prefWidth="225.0">
+                        <ButtonBar layoutX="-18.0" layoutY="160.0" prefHeight="40.0" prefWidth="260.0">
                           <buttons>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Apple II" wrappingWidth="95.0">
+                              <Text fx:id="appleIICountField" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="25.0" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Apple II" textAlignment="CENTER" wrappingWidth="95.0">
                                  <font>
                                     <Font name="Lucida Fax Regular" size="12.0" />
                                  </font>
                               </Text>
-                            <Button mnemonicParsing="false" text="Buy" onAction="#buyAppleIIAction" />
+                            <Button fx:id="appleIIButtonBuy" mnemonicParsing="false" onAction="#buyAppleIIAction" text="Buy" />
                           </buttons>
                         </ButtonBar>
-                        <ButtonBar layoutY="240.0" prefHeight="40.0" prefWidth="225.0">
+                        <ButtonBar layoutX="-18.0" layoutY="200.0" prefHeight="40.0" prefWidth="260.0">
                           <buttons>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Macintosh" wrappingWidth="95.0">
+                              <Text fx:id="commodore64CountField" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="25.0" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Commodore 64" textAlignment="CENTER" wrappingWidth="95.0">
                                  <font>
                                     <Font name="Lucida Fax Regular" size="12.0" />
                                  </font>
                               </Text>
-                            <Button mnemonicParsing="false" text="Buy" onAction="#buyCommodore64Action"/>
+                            <Button fx:id="commodore64ButtonBuy" mnemonicParsing="false" onAction="#buyCommodore64Action" text="Buy" />
                           </buttons>
                         </ButtonBar>
-                        <ButtonBar layoutY="280.0" prefHeight="40.0" prefWidth="225.0">
+                        <ButtonBar layoutX="-18.0" layoutY="240.0" prefHeight="40.0" prefWidth="260.0">
                           <buttons>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-                            <Button mnemonicParsing="false" text="Buy" onAction="#buyAppleMacintoshAction" />
+                              <Text fx:id="appleMacintoshCountField" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="25.0" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Macintosh" textAlignment="CENTER" wrappingWidth="95.0">
+                                 <font>
+                                    <Font name="Lucida Fax Regular" size="12.0" />
+                                 </font>
+                              </Text>
+                            <Button fx:id="appleMacintoshButtonBuy" mnemonicParsing="false" onAction="#buyAppleMacintoshAction" text="Buy" />
                           </buttons>
                         </ButtonBar>
-                        <ButtonBar layoutY="320.0" prefHeight="40.0" prefWidth="225.0">
+                        <ButtonBar layoutX="-18.0" layoutY="280.0" prefHeight="40.0" prefWidth="260.0">
                           <buttons>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="25.0" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Item" textAlignment="CENTER" wrappingWidth="95.0" />
                             <Button mnemonicParsing="false" text="Buy" />
                           </buttons>
                         </ButtonBar>
-                        <ButtonBar layoutY="360.0" prefHeight="40.0" prefWidth="225.0">
+                        <ButtonBar layoutX="-18.0" layoutY="320.0" prefHeight="40.0" prefWidth="260.0">
                           <buttons>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="25.0" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Item" textAlignment="CENTER" wrappingWidth="95.0" />
                             <Button mnemonicParsing="false" text="Buy" />
                           </buttons>
                         </ButtonBar>
-                        <ButtonBar layoutY="400.0" prefHeight="40.0" prefWidth="225.0">
+                        <ButtonBar layoutX="-18.0" layoutY="360.0" prefHeight="40.0" prefWidth="260.0">
                           <buttons>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="25.0" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Item" textAlignment="CENTER" wrappingWidth="95.0" />
                             <Button mnemonicParsing="false" text="Buy" />
                           </buttons>
                         </ButtonBar>
-                        <ButtonBar layoutY="440.0" prefHeight="40.0" prefWidth="225.0">
+                        <ButtonBar layoutX="-18.0" layoutY="400.0" prefHeight="40.0" prefWidth="260.0">
                           <buttons>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="25.0" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Item" textAlignment="CENTER" wrappingWidth="95.0" />
                             <Button mnemonicParsing="false" text="Buy" />
                           </buttons>
                         </ButtonBar>
-                        <ButtonBar layoutY="200.0" prefHeight="40.0" prefWidth="225.0">
+                        <ButtonBar layoutX="-18.0" layoutY="440.0" prefHeight="40.0" prefWidth="260.0">
                           <buttons>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Commodore 64" wrappingWidth="95.0">
-                                 <font>
-                                    <Font name="Lucida Fax Regular" size="12.0" />
-                                 </font>
-                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="25.0" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Item" textAlignment="CENTER" wrappingWidth="95.0" />
                             <Button mnemonicParsing="false" text="Buy" />
                           </buttons>
                         </ButtonBar>
@@ -158,6 +170,9 @@
                   </AnchorPane>
               </content>
             </ScrollPane>
+            <Text layoutX="552.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" />
+            <Text layoutX="448.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item" />
+            <Text layoutX="384.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Qt." />
          </children>
       </AnchorPane>
    </children>

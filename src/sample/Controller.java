@@ -2,13 +2,9 @@ package sample;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.layout.GridPane;
+import javafx.scene.control.Button;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -17,61 +13,116 @@ public class Controller {
 
     Shop shop;
 
+    //FXML
     @FXML
     Text counterOutput;
     @FXML
     Text perSecDisplay;
+    @FXML
+    Text abakusCountField;
+    @FXML
+    Text pascalineCountField;
+    @FXML
+    Text eniacCountField;
+    @FXML
+    Text tradicCountField;
+    @FXML
+    Text appleIICountField;
+    @FXML
+    Text commodore64CountField;
+    @FXML
+    Text appleMacintoshCountField;
+    @FXML
+    Button abakusButtonBuy;
+    @FXML
+    Button pascalineButtonBuy;
+    @FXML
+    Button eniacButtonBuy;
+    @FXML
+    Button tradicButtonBuy;
+    @FXML
+    Button appleIIButtonBuy;
+    @FXML
+    Button commodore64ButtonBuy;
+    @FXML
+    Button appleMacintoshButtonBuy;
 
+    //Initialiserer viktige
     @FXML
     void initialize() {
         shop = new Shop();
-        updateGUI();
         shop.updateShopAtBuy();
-        perSecDisplay.setText(String.format("%.1f BTCs/s", shop.getBitcoinsPerSec()));
+        updateGUI();
+        updateFields();
     }
 
+    //Funksjon som knyttes til klikk på bitcoin i GUI
     @FXML
     void countAction() {
         shop.bitcoinOnClick();
         counterOutput.setText(String.format("%.0f BTCs", shop.getTotalBitcoins()));
     }
 
+    //Kjøp funksjoner som knyttes til knapper i GUI
     @FXML
     void buyAbakusAction() {
         shop.buyAbakus();
-        perSecDisplay.setText(String.format("%.1f BTCs/s", shop.getBitcoinsPerSec()));
+        updateFields();
     }
     @FXML
     void buyPascalineAction() {
         shop.buyPascaline();
-        perSecDisplay.setText(String.format("%.1f BTCs/s", shop.getBitcoinsPerSec()));
+        updateFields();
     }
     @FXML
     void buyENIACAction() {
         shop.buyEniac();
-        perSecDisplay.setText(String.format("%.1f BTCs/s", shop.getBitcoinsPerSec()));
+        updateFields();
     }
     @FXML
     void buyTRADICAction() {
         shop.buyTradic();
-        perSecDisplay.setText(String.format("%.1f BTCs/s", shop.getBitcoinsPerSec()));
+        updateFields();
     }
     @FXML
     void buyAppleIIAction() {
         shop.buyAppleII();
-        perSecDisplay.setText(String.format("%.1f BTCs/s", shop.getBitcoinsPerSec()));
+        updateFields();
     }
     @FXML
     void buyCommodore64Action() {
         shop.buyCommodore64();
-        perSecDisplay.setText(String.format("%.1f BTCs/s", shop.getBitcoinsPerSec()));
+        updateFields();
     }
     @FXML
     void buyAppleMacintoshAction() {
         shop.buyAppleMacintosh();
-        perSecDisplay.setText(String.format("%.1f BTCs/s", shop.getBitcoinsPerSec()));
+
     }
 
+    //Oppdaterer tekstfelt som ikkje må oppdateres kontinuerlig (BTCs/s og knapper)
+    void updateFields() {
+        //Oppdaterer per sec
+        perSecDisplay.setText(String.format("%.1f BTCs/s", shop.getBitcoinsPerSec()));
+        //Oppdaterer pris
+        abakusButtonBuy.setText(String.format("%.0f", shop.getAbakusPrice()));
+        pascalineButtonBuy.setText(String.format("%.0f", shop.getPascalinePrice()));
+        eniacButtonBuy.setText(String.format("%.0f", shop.getEniacPrice()));
+        tradicButtonBuy.setText(String.format("%.0f", shop.getTradicPrice()));
+        appleIIButtonBuy.setText(String.format("%.0f", shop.getAppleIIPrice()));
+        commodore64ButtonBuy.setText(String.format("%.0f", shop.getCommodore64Price()));
+        appleMacintoshButtonBuy.setText(String.format("%.0f", shop.getAppleMacintoshPrice()));
+        //Oppdaterer count
+        abakusCountField.setText(String.format("%d",shop.getAbakusCount()));
+        pascalineCountField.setText(String.format("%d",shop.getPascalineCount()));
+        eniacCountField.setText(String.format("%d",shop.getEniacCount()));
+        tradicCountField.setText(String.format("%d",shop.getTradicCount()));
+        appleIICountField.setText(String.format("%d",shop.getAppleIICount()));
+        commodore64CountField.setText(String.format("%d",shop.getCommodore64Count()));
+        appleMacintoshCountField.setText(String.format("%d",shop.getAppleMacintoshCount()));
+    }
+
+    //Oppdaterer felt som må oppdateres kontinuerlig (Total bitcoins)
     @FXML
     void updateGUI() {
         Timer timer = new Timer();
