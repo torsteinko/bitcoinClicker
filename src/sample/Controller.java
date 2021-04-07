@@ -18,7 +18,9 @@ public class Controller {
     @FXML
     Text counterOutput;
     @FXML
-    Text perSecDisplay;
+    Text satoshiTotalCount;
+    @FXML
+    Text satoshiPerSec;
     @FXML
     Text abakusCountField;
     @FXML
@@ -78,7 +80,8 @@ public class Controller {
     @FXML
     void countAction() {
         main.bitcoinOnClick();
-        counterOutput.setText(String.format("%.1f BTCs", main.getTotalBitcoins()));
+        counterOutput.setText(String.format("%.8f BTCs", Math.floor(main.getTotalBitcoins())/(10E7)));
+        satoshiTotalCount.setText(String.format("%.1f Satoshi", main.getTotalBitcoins()));
     }
 
     //Kjøp funksjoner som knyttes til knapper i GUI
@@ -126,16 +129,16 @@ public class Controller {
     //Oppdaterer tekstfelt som ikkje må oppdateres kontinuerlig (BTCs/s og knapper)
     void updateFields() {
         //Oppdaterer per sec
-        perSecDisplay.setText(String.format("%.1f BTCs/s", main.getBitcoinsPerSec()));
+        satoshiPerSec.setText(String.format("%.1f Satoshi/s", main.getBitcoinsPerSec()));
         //Oppdaterer pris
-        cursorUpgradeButton.setText(String.format("%.0f", main.getCursorPrice()));
-        abakusButtonBuy.setText(String.format("%.0f", main.getAbakusPrice()));
-        pascalineButtonBuy.setText(String.format("%.0f", main.getPascalinePrice()));
-        eniacButtonBuy.setText(String.format("%.0f", main.getEniacPrice()));
-        tradicButtonBuy.setText(String.format("%.0f", main.getTradicPrice()));
-        appleIIButtonBuy.setText(String.format("%.0f", main.getAppleIIPrice()));
-        commodore64ButtonBuy.setText(String.format("%.0f", main.getCommodore64Price()));
-        appleMacintoshButtonBuy.setText(String.format("%.0f", main.getAppleMacintoshPrice()));
+        cursorUpgradeButton.setText(String.format("%.8f", main.getCursorPrice()/(10E7)));
+        abakusButtonBuy.setText(String.format("%.8f", main.getAbakusPrice()/(10E7)));
+        pascalineButtonBuy.setText(String.format("%.8f", main.getPascalinePrice()/(10E7)));
+        eniacButtonBuy.setText(String.format("%.8f", main.getEniacPrice()/(10E7)));
+        tradicButtonBuy.setText(String.format("%.8f", main.getTradicPrice()/(10E7)));
+        appleIIButtonBuy.setText(String.format("%.8f", main.getAppleIIPrice()/(10E7)));
+        commodore64ButtonBuy.setText(String.format("%.8f", main.getCommodore64Price()/(10E7)));
+        appleMacintoshButtonBuy.setText(String.format("%.8f", main.getAppleMacintoshPrice()/(10E7)));
         //Oppdaterer count
         cursorLevelCount.setText(String.format("Level: %d", main.getCursorLevelCount()));
         abakusCountField.setText(String.format("%d", main.getAbakusCount()));
@@ -160,7 +163,8 @@ public class Controller {
 
                     @Override
                     public void run() {
-                        counterOutput.setText(String.format("%.1f BTCs", main.getTotalBitcoins()));
+                        counterOutput.setText(String.format("%.8f BTCs", (Math.floor(main.getTotalBitcoins()))/(10E7)));
+                        satoshiTotalCount.setText(String.format("%.1f Satoshi", main.getTotalBitcoins()));
                         disableButtons();
                     }
                 });
