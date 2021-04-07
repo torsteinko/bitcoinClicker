@@ -1,10 +1,13 @@
 package sample;
 
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
+import javax.swing.text.html.ImageView;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -79,6 +82,13 @@ public class Controller {
     void countAction() {
         main.bitcoinOnClick();
         counterOutput.setText(String.format("%.1f BTCs", main.getTotalBitcoins()));
+        System.out.println("press");
+    }
+
+    @FXML
+    void keyRelease() {
+        System.out.println("release");
+
     }
 
     //Kjøp funksjoner som knyttes til knapper i GUI
