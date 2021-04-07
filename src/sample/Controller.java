@@ -10,9 +10,11 @@ import java.util.TimerTask;
 
 public class Controller {
 
+    //Initialiserer som static for å kunne aksesere i MainApp
+    //Dette sånn at lagring og gjenoppretting kan trigges fra start() og stop()
     private static Main main = new Main();
 
-    //FXML
+    //FXML referanser til sample
     @FXML
     Text counterOutput;
     @FXML
@@ -49,6 +51,18 @@ public class Controller {
     Button commodore64ButtonBuy;
     @FXML
     Button appleMacintoshButtonBuy;
+    @FXML
+    Button temp1;
+    @FXML
+    Button temp2;
+    @FXML
+    Button temp3;
+    @FXML
+    Button temp4;
+    @FXML
+    Button temp5;
+    @FXML
+    Button startNewGameButton;
 
     //Initialiserer viktige
     @FXML
@@ -57,6 +71,7 @@ public class Controller {
         main.timerUpdate();
         updateGUI();
         updateFields();
+        disableTempButtons();
     }
 
     //Funksjon som knyttes til klikk på bitcoin i GUI
@@ -146,7 +161,7 @@ public class Controller {
                     @Override
                     public void run() {
                         counterOutput.setText(String.format("%.1f BTCs", main.getTotalBitcoins()));
-
+                        disableButtons();
                     }
                 });
             }
@@ -162,6 +177,41 @@ public class Controller {
 
     public static void setObject(Main obj) {
         main = obj;
+    }
+
+    //Disabler knapper om du ikkje har råd
+    void disableButtons() {
+        boolean cursorDisable = main.getTotalBitcoins() < main.getCursorPrice();
+        boolean abakusDisable = main.getTotalBitcoins() < main.getAbakusPrice();
+        boolean pascalineDisable = main.getTotalBitcoins() < main.getPascalinePrice();
+        boolean eniacDisable = main.getTotalBitcoins() < main.getEniacPrice();
+        boolean tradicDisable = main.getTotalBitcoins() < main.getTradicPrice();
+        boolean appleIIDisable = main.getTotalBitcoins() < main.getAppleIIPrice();
+        boolean commodore64Disable = main.getTotalBitcoins() < main.getCommodore64Price();
+        boolean appleMacintoshDisable = main.getTotalBitcoins() < main.getAppleMacintoshPrice();
+        cursorUpgradeButton.setDisable(cursorDisable);
+        abakusButtonBuy.setDisable(abakusDisable);
+        pascalineButtonBuy.setDisable(pascalineDisable);
+        eniacButtonBuy.setDisable(eniacDisable);
+        tradicButtonBuy.setDisable(tradicDisable);
+        appleIIButtonBuy.setDisable(appleIIDisable);
+        commodore64ButtonBuy.setDisable(commodore64Disable);
+        appleMacintoshButtonBuy.setDisable(appleMacintoshDisable);
+    }
+
+    //Permanent disabler knapper som ikkje er i bruk
+    void disableTempButtons() {
+        temp1.setDisable(true);
+        temp2.setDisable(true);
+        temp3.setDisable(true);
+        temp4.setDisable(true);
+        temp5.setDisable(true);
+    }
+
+    @FXML
+    void startNewGame() {
+        MainApp.startNewGame();
+        initialize();
     }
 
 }
