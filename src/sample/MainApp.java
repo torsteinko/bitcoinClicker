@@ -40,7 +40,6 @@ public class MainApp extends Application {
         Controller.clearMainListeners();
         //Lagrer vha. SaveHandler
         SaveHandler.writeToFile(Controller.getObject());
-
         //Går utav programmet
         //Dette trengs ettersom timerene vil fortsette å gå viss ikkje
         System.exit(0);
