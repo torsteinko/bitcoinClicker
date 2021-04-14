@@ -1,14 +1,10 @@
 package sample;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
-public class Controller {
+public class Controller implements MainListener {
 
     //Initialiserer som static for å kunne aksesere i MainApp
     //Dette sånn at lagring og gjenoppretting kan trigges fra start() og stop()
@@ -71,7 +67,7 @@ public class Controller {
     void initialize() {
         main.updateShopAtBuy();
         main.timerUpdate();
-        updateGUI();
+        main.addListener(this);
         updateFields();
         disableTempButtons();
     }
@@ -123,7 +119,7 @@ public class Controller {
     @FXML
     void buyAppleMacintoshAction() {
         main.buyAppleMacintosh();
-
+        updateFields();
     }
 
     //Oppdaterer tekstfelt som ikkje må oppdateres kontinuerlig (BTCs/s og knapper)
@@ -151,27 +147,19 @@ public class Controller {
 
     }
 
-    //Oppdaterer felt som må oppdateres kontinuerlig (Total bitcoins)
-    @FXML
-    void updateGUI() {
-        Timer timer = new Timer();
-        TimerTask updateRate = new TimerTask() {
-            @Override
-            public void run() {
-                //runLater to be able to use Timers in Controller
-                Platform.runLater(new Runnable() {
+    //Observerer Main, endrer GUI når Main endrer seg
+    public void mainChanged(double totalBitcoins) {
+        //Endrer GUI når Main adder
+        counterOutput.setText(String.format("%.8f BTCs", (Math.floor(totalBitcoins))/(10E7)));
+        satoshiTotalCount.setText(String.format("%.1f Satoshi", totalBitcoins));
 
-                    @Override
-                    public void run() {
-                        counterOutput.setText(String.format("%.8f BTCs", (Math.floor(main.getTotalBitcoins()))/(10E7)));
-                        satoshiTotalCount.setText(String.format("%.1f Satoshi", main.getTotalBitcoins()));
-                        disableButtons();
-                    }
-                });
-            }
-        };
+        //Kaller på denne her, siden mainChanged blir kallet på såpass regelmessig.
+        //Kunne brukt observatør-observert for hver knapp, men dette er mykje arbeid for en relativt smal gevinst.
+        disableButtons();
+    }
 
-        timer.schedule(updateRate, 0, 20);
+    public static void clearMainListeners() {
+        main.clearListeners();
     }
 
     //Getters og setters for instansen

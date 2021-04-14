@@ -18,6 +18,7 @@ public class SaveHandler {
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         } catch (IOException e) {
+            e.printStackTrace();
             System.out.println("Error initializing stream");
         }
 
@@ -44,22 +45,6 @@ public class SaveHandler {
             e.printStackTrace();
         }
         return null;
-    }
-
-    public static void newGame() {
-        try {
-            FileOutputStream f = new FileOutputStream(("src/sample/data.ser"));
-            ObjectOutputStream o = new ObjectOutputStream(f);
-
-            o.writeObject((Main) new Main());
-            o.flush();
-
-            f.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found");
-        } catch (IOException e) {
-            System.out.println("Error initializing stream");
-        }
     }
 
 }

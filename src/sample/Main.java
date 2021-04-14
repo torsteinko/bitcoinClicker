@@ -2,6 +2,8 @@ package sample;
 
 import java.io.Serializable;
 import java.lang.Math;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -120,10 +122,6 @@ public class Main implements Serializable {
         this.totalBitcoins = totalBitcoins;
     }
 
-    //Oppdaterer totalBitcoins med bitcoinsPerClick
-    public void bitcoinOnClick() {
-        setTotalBitcoins(getTotalBitcoins() + getBitcoinsPerClick());
-    }
 
     // Oppdaterer bitcoinsShopPerSec
     public void updateShopPerSec() {
@@ -222,13 +220,44 @@ public class Main implements Serializable {
     }
 
 
+    //Liste med listeners (forsåvidt bare controller)
+    private List<MainListener> mainListeners = new ArrayList<>();
+
+    //Legger til listeners (Controller kaller denne)
+    public void addListener(MainListener mainListener) {
+        if (!mainListeners.contains(mainListener)) {
+            mainListeners.add(mainListener);
+        }
+    }
+
+    //Sletter alle listeners (Nødvendig for lagring)
+    public void clearListeners() {
+        mainListeners.clear();
+    }
+
+    //Oppdaterer totalBitcoins med bitcoinsPerClick
+    public void bitcoinOnClick() {
+        setTotalBitcoins(getTotalBitcoins() + getBitcoinsPerClick());
+
+        //Gir beskjed til observatør (Controller) om at totalBitcoins er endret
+        for (MainListener m : mainListeners) {
+            m.mainChanged(getTotalBitcoins());
+        }
+    }
+
     //Timer oppdaterer totalBitcoins med bitcoinsPerSec
     public void timerUpdate() {
         Timer timer = new Timer();
         TimerTask updateRate = new TimerTask() {
             @Override
             public void run() {
+                //Legger til bitcoinsPerSec/50 ettersom dette blir utført 50 ganger i sekundet
                 setTotalBitcoins(getTotalBitcoins()+(getBitcoinsPerSec()/50));
+
+                //Gir beskjed til observatør (Controller) om at totalBitcoins er endret
+                for (MainListener m : mainListeners) {
+                    m.mainChanged(getTotalBitcoins());
+                }
             }
         };
         timer.schedule(updateRate, 0, 20);

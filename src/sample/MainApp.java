@@ -32,15 +32,25 @@ public class MainApp extends Application {
     @Override
     public void stop() throws Exception{
         //Lagring
+
+        //Sletter Controller som listener til Main
+        //Viss ikkje vil controller objektet bli forsøkt serialisert, og dermed vil FXML-fil også bli det
+        //FXML-filer kan ikkje bli serialisert, og vil forårsake problemer
+        //Controller adder seg som listener på startup igjen i initialize()
+        Controller.clearMainListeners();
+        //Lagrer vha. SaveHandler
         SaveHandler.writeToFile(Controller.getObject());
+
         //Går utav programmet
         //Dette trengs ettersom timerene vil fortsette å gå viss ikkje
         System.exit(0);
     }
 
     public static void startNewGame() {
-        SaveHandler.newGame();
-        Controller.setObject((Main) SaveHandler.readFromFile());
+        //Sletter listeners (Controller) til objektet
+        Controller.clearMainListeners();
+        //Lager ein ny instans av Main-objektet
+        Controller.setObject(new Main());
     }
 
     //Main
