@@ -26,7 +26,7 @@ public class Main implements Serializable {
     private int appleMacintoshCount;
 
     // Startpris på oppgraderinger
-    private final double CURSOR_START_PRICE = 1800;
+    private final double CURSOR_START_PRICE = 600;
     private final double ABAKUS_START_PRICE = 20;
     private final double PASCALINE_START_PRICE = 110;
     private final double ENIAC_START_PRICE = 1300;

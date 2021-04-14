@@ -162,7 +162,7 @@ public class Controller implements MainListener {
         main.clearListeners();
     }
 
-    //Getters og setters for instansen
+    //Getters og setters for instansen (Til lagring i MainApp)
     public static Main getObject() {
         return main;
     }
