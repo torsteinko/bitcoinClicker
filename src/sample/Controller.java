@@ -6,10 +6,6 @@ import javafx.scene.text.Text;
 
 public class Controller implements MainListener {
 
-    //Initialiserer som static for å kunne aksesere i MainApp
-    //Dette sånn at lagring og gjenoppretting kan trigges fra start() og stop()
-    private static Main main = new Main();
-
     //FXML referanser til sample
     @FXML
     Text counterOutput;
@@ -61,6 +57,8 @@ public class Controller implements MainListener {
     Button temp5;
     @FXML
     Button startNewGameButton;
+
+    Main main = MainApp.getInstance();
 
     //Initialiserer viktige
     @FXML
@@ -160,20 +158,6 @@ public class Controller implements MainListener {
         disableButtons();
     }
 
-    //For å fjerne alle listeners
-    //Static slik at MainApp skal kunne kalle den
-    public static void clearMainListeners() {
-        main.clearListeners();
-    }
-
-    //Getters og setters for instansen (Til lagring i MainApp)
-    public static Main getObject() {
-        return main;
-    }
-    public static void setObject(Main obj) {
-        main = obj;
-    }
-
     //Disabler knapper om du ikkje har råd
     void disableButtons() {
         boolean cursorDisable = main.getTotalBitcoins() < main.getPrice(main.cursor);
@@ -207,6 +191,7 @@ public class Controller implements MainListener {
     @FXML
     void startNewGame() {
         MainApp.startNewGame();
+        main = MainApp.getInstance();
         initialize();
     }
 

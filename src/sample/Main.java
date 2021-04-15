@@ -34,6 +34,7 @@ public class Main implements Serializable {
         return bitcoinsPerSec;
     }
 
+
     //Kjøp-funksjon for oppgraderinger
     public void buyShop(Shop shop) {
         if (totalBitcoins >= shop.getPrice()) {
@@ -67,6 +68,7 @@ public class Main implements Serializable {
         //Oppdaterer bitcoinsPerSec
         bitcoinsPerSec = bitcoinsTempPerSec;
     }
+
 
     //Liste med listeners (forsåvidt bare controller)
     private List<MainListener> mainListeners = new ArrayList<>();

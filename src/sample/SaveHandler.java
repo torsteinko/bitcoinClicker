@@ -5,7 +5,7 @@ import java.io.*;
 public class SaveHandler {
 
     //Funksjon som tar inn eit Main objekt og skriver til fil
-    public static void writeToFile(Main main) {
+    public void writeToFile(Main main) {
         try {
             FileOutputStream f = new FileOutputStream(("src/sample/data.ser"));
             ObjectOutputStream o = new ObjectOutputStream(f);
@@ -25,7 +25,7 @@ public class SaveHandler {
     }
 
     //Funksjon som returnerer et Main objekt fra fil
-    public static Main readFromFile() {
+    public Main readFromFile() {
         try {
             FileInputStream f = new FileInputStream(("src/sample/data.ser"));
             ObjectInputStream o = new ObjectInputStream(f);
