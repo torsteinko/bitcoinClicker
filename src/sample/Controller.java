@@ -58,15 +58,14 @@ public class Controller implements MainListener {
     @FXML
     Button startNewGameButton;
 
-    Main main = MainApp.getInstance();
+    Main main;
 
     //Initialiserer viktige
     @FXML
     void initialize() {
+        main = Main.getInstance();
         //Oppdaterer variabler i main
         main.updateAtBuy();
-        //Starter timer i main
-        main.timerUpdate();
         //Legger controller til som listener
         main.addListener(this);
         //Oppdaterer GUI
@@ -83,42 +82,42 @@ public class Controller implements MainListener {
     //Kjøp funksjoner som knyttes til knapper i GUI
     @FXML
     void buyCursorAction() {
-        main.buyCursor(main.cursor);
+        main.buyCursor();
         updateFields();
     }
     @FXML
     void buyAbakusAction() {
-        main.buyShop(main.abakus);
+        main.buyShop("Abakus");
         updateFields();
     }
     @FXML
     void buyPascalineAction() {
-        main.buyShop(main.pascaline);
+        main.buyShop("Pascaline");
         updateFields();
     }
     @FXML
     void buyENIACAction() {
-        main.buyShop(main.eniac);
+        main.buyShop("ENIAC");
         updateFields();
     }
     @FXML
     void buyTRADICAction() {
-        main.buyShop(main.tradic);
+        main.buyShop("TRADIC");
         updateFields();
     }
     @FXML
     void buyAppleIIAction() {
-        main.buyShop(main.appleII);
+        main.buyShop("Apple II");
         updateFields();
     }
     @FXML
     void buyCommodore64Action() {
-        main.buyShop(main.commodore64);
+        main.buyShop("Commodore 64");
         updateFields();
     }
     @FXML
     void buyAppleMacintoshAction() {
-        main.buyShop(main.appleMacintosh);
+        main.buyShop("Apple Macintosh");
         updateFields();
     }
 
@@ -127,23 +126,23 @@ public class Controller implements MainListener {
         //Oppdaterer per sec
         satoshiPerSec.setText(String.format("%.1f Satoshi/s", main.getBitcoinsPerSec()));
         //Oppdaterer pris
-        cursorUpgradeButton.setText(String.format("%.8f", main.getPrice(main.cursor)/(10E7)));
-        abakusButtonBuy.setText(String.format("%.8f", main.getPrice(main.abakus)/(10E7)));
-        pascalineButtonBuy.setText(String.format("%.8f", main.getPrice(main.pascaline)/(10E7)));
-        eniacButtonBuy.setText(String.format("%.8f", main.getPrice(main.eniac)/(10E7)));
-        tradicButtonBuy.setText(String.format("%.8f", main.getPrice(main.tradic)/(10E7)));
-        appleIIButtonBuy.setText(String.format("%.8f", main.getPrice(main.appleII)/(10E7)));
-        commodore64ButtonBuy.setText(String.format("%.8f", main.getPrice(main.commodore64)/(10E7)));
-        appleMacintoshButtonBuy.setText(String.format("%.8f", main.getPrice(main.appleMacintosh)/(10E7)));
+        cursorUpgradeButton.setText(String.format("%.8f", main.getPrice("Cursor")/(10E7)));
+        abakusButtonBuy.setText(String.format("%.8f", main.getPrice("Abakus")/(10E7)));
+        pascalineButtonBuy.setText(String.format("%.8f", main.getPrice("Pascaline")/(10E7)));
+        eniacButtonBuy.setText(String.format("%.8f", main.getPrice("ENIAC")/(10E7)));
+        tradicButtonBuy.setText(String.format("%.8f", main.getPrice("TRADIC")/(10E7)));
+        appleIIButtonBuy.setText(String.format("%.8f", main.getPrice("Apple II")/(10E7)));
+        commodore64ButtonBuy.setText(String.format("%.8f", main.getPrice("Commodore 64")/(10E7)));
+        appleMacintoshButtonBuy.setText(String.format("%.8f", main.getPrice("Apple Macintosh")/(10E7)));
         //Oppdaterer count
-        cursorLevelCount.setText(String.format("Level: %d", main.getCount(main.cursor)));
-        abakusCountField.setText(String.format("%d", main.getCount(main.abakus)));
-        pascalineCountField.setText(String.format("%d", main.getCount(main.pascaline)));
-        eniacCountField.setText(String.format("%d", main.getCount(main.eniac)));
-        tradicCountField.setText(String.format("%d", main.getCount(main.tradic)));
-        appleIICountField.setText(String.format("%d", main.getCount(main.appleII)));
-        commodore64CountField.setText(String.format("%d", main.getCount(main.commodore64)));
-        appleMacintoshCountField.setText(String.format("%d", main.getCount(main.appleMacintosh)));
+        cursorLevelCount.setText(String.format("Level: %d", main.getCount("Cursor")));
+        abakusCountField.setText(String.format("%d", main.getCount("Abakus")));
+        pascalineCountField.setText(String.format("%d", main.getCount("Pascaline")));
+        eniacCountField.setText(String.format("%d", main.getCount("ENIAC")));
+        tradicCountField.setText(String.format("%d", main.getCount("TRADIC")));
+        appleIICountField.setText(String.format("%d", main.getCount("Apple II")));
+        commodore64CountField.setText(String.format("%d", main.getCount("Commodore 64")));
+        appleMacintoshCountField.setText(String.format("%d", main.getCount("Apple Macintosh")));
 
     }
 
@@ -160,14 +159,14 @@ public class Controller implements MainListener {
 
     //Disabler knapper om du ikkje har råd
     void disableButtons() {
-        boolean cursorDisable = main.getTotalBitcoins() < main.getPrice(main.cursor);
-        boolean abakusDisable = main.getTotalBitcoins() < main.getPrice(main.abakus);
-        boolean pascalineDisable = main.getTotalBitcoins() < main.getPrice(main.pascaline);
-        boolean eniacDisable = main.getTotalBitcoins() < main.getPrice(main.eniac);
-        boolean tradicDisable = main.getTotalBitcoins() < main.getPrice(main.tradic);
-        boolean appleIIDisable = main.getTotalBitcoins() < main.getPrice(main.appleII);
-        boolean commodore64Disable = main.getTotalBitcoins() < main.getPrice(main.commodore64);
-        boolean appleMacintoshDisable = main.getTotalBitcoins() < main.getPrice(main.appleMacintosh);
+        boolean cursorDisable = main.getTotalBitcoins() < main.getPrice("Cursor");
+        boolean abakusDisable = main.getTotalBitcoins() < main.getPrice("Abakus");
+        boolean pascalineDisable = main.getTotalBitcoins() < main.getPrice("Pascaline");
+        boolean eniacDisable = main.getTotalBitcoins() < main.getPrice("ENIAC");
+        boolean tradicDisable = main.getTotalBitcoins() < main.getPrice("TRADIC");
+        boolean appleIIDisable = main.getTotalBitcoins() < main.getPrice("Apple II");
+        boolean commodore64Disable = main.getTotalBitcoins() < main.getPrice("Commodore 64");
+        boolean appleMacintoshDisable = main.getTotalBitcoins() < main.getPrice("Apple Macintosh");
         cursorUpgradeButton.setDisable(cursorDisable);
         abakusButtonBuy.setDisable(abakusDisable);
         pascalineButtonBuy.setDisable(pascalineDisable);
@@ -191,7 +190,6 @@ public class Controller implements MainListener {
     @FXML
     void startNewGame() {
         MainApp.startNewGame();
-        main = MainApp.getInstance();
         initialize();
     }
 

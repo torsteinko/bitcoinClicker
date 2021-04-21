@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Shop implements Serializable {
 
-    private String name;
+    private final String name;
     private int count;
     private double price;
     private double perSec;
@@ -30,6 +30,14 @@ public class Shop implements Serializable {
     }
     public double getPerSec() {
         return perSec;
+    }
+    public String getName() {
+        return name;
+    }
+    public void updateFields(Shop newShop) {
+        this.count = newShop.count;
+        this.perSec = newShop.perSec;
+        this.price = newShop.price;
     }
 
 }

@@ -8,20 +8,6 @@ import javafx.stage.Stage;
 
 public class MainApp extends Application {
 
-    //Singleton
-    private static class SingletonHelper {
-        //Ikkje final, fordi vil kunne sette bestemme main fra lagring og ved newGame()
-        private static Main instance = new Main();
-    }
-    //Getters og setters
-    public static Main getInstance() {
-        return SingletonHelper.instance;
-    }
-    public static void setMain(Main main) {
-        if (main != null)
-            SingletonHelper.instance = main;
-    }
-
     //Lager saveHandler-objekt for å håndtere lagring
     SaveHandler saveHandler = new SaveHandler();
 
@@ -33,8 +19,16 @@ public class MainApp extends Application {
         //Programmet starter da bare i default modus
         try {
             if (saveHandler.readFromFile() != null) {
-                Main main = saveHandler.readFromFile();
-                setMain(main);
+                Main newMain = saveHandler.readFromFile();
+                Main oldMain = Main.getInstance();
+
+                //Setter totalBitcoins lik det fra fil
+                oldMain.setTotalBitcoins(newMain.getTotalBitcoins());
+                //Setter alle shop-objekt lik det fra fil
+                for (Shop s : oldMain.getShopList()) {
+                    s.updateFields(newMain.getShopObject(s.getName()));
+                }
+
             }
             //Initialiserer vinduet
             Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
@@ -55,23 +49,33 @@ public class MainApp extends Application {
         //Viss ikkje vil controller objektet bli forsøkt serialisert, og dermed vil FXML-fil også bli det
         //FXML-filer kan ikkje bli serialisert, og vil forårsake problemer
         //Controller adder seg som listener på startup igjen i initialize()
-        getInstance().clearListeners();
+        Main.getInstance().clearListeners();
         //Lagrer vha. SaveHandler
-        saveHandler.writeToFile(getInstance());
+        saveHandler.writeToFile(Main.getInstance());
         //Går utav programmet
         //Dette trengs ettersom timerene vil fortsette å gå viss ikkje
         System.exit(0);
     }
 
     public static void startNewGame() {
-        //Sletter listeners (Controller) til objektet
-        getInstance().clearListeners();
-        setMain(new Main());
+        //Henter denne instansen
+        Main oldMain = Main.getInstance();
+        //Lager ein ny instans
+        Main newMain = new Main();
+
+        //Setter totalBitcoins lik det fra fil
+        oldMain.setTotalBitcoins(newMain.getTotalBitcoins());
+        //Setter alle shop-objekt lik det fra fil
+        for (Shop s : oldMain.getShopList()) {
+            s.updateFields(newMain.getShopObject(s.getName()));
+        }
+
     }
 
     //Main
     public static void main(String[] args) {
         launch(args);
+
     }
 
 }
