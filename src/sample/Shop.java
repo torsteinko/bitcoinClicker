@@ -9,6 +9,7 @@ public class Shop implements Serializable {
     private double price;
     private double perSec;
 
+    //Feilhåndtering ikkje nødvendig ettersom bruker ikkje interagerer med dette
     public Shop(String name, int count, double price, double perSec) {
         this.name = name;
         this.count = count;

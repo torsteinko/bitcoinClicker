@@ -57,6 +57,10 @@ public class Controller implements MainListener {
     Button temp5;
     @FXML
     Button startNewGameButton;
+    @FXML
+    Button saveButton;
+    @FXML
+    Button loadButton;
 
     Main main;
 
@@ -143,7 +147,6 @@ public class Controller implements MainListener {
         appleIICountField.setText(String.format("%d", main.getCount("Apple II")));
         commodore64CountField.setText(String.format("%d", main.getCount("Commodore 64")));
         appleMacintoshCountField.setText(String.format("%d", main.getCount("Apple Macintosh")));
-
     }
 
     //Observerer Main, endrer GUI når Main endrer seg
@@ -191,6 +194,41 @@ public class Controller implements MainListener {
     void startNewGame() {
         MainApp.startNewGame();
         initialize();
+    }
+
+    SaveHandler saveHandler = new SaveHandler();
+    @FXML
+    void loadGame() {
+        try {
+            if (saveHandler.readFromFile() != null) {
+                Main newMain = saveHandler.readFromFile();
+                Main oldMain = Main.getInstance();
+
+                //Setter totalBitcoins lik det fra fil
+                oldMain.setTotalBitcoins(newMain.getTotalBitcoins());
+                //Setter alle shop-objekt lik det fra fil
+                for (Shop s : oldMain.getShopList()) {
+                    s.updateFields(newMain.getShopObject(s.getName()));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void saveGame() {
+        //Lagring
+
+        //Sletter Controller som listener til Main
+        //Viss ikkje vil controller objektet bli forsøkt serialisert, og dermed vil FXML-fil også bli det
+        //FXML-filer kan ikkje bli serialisert, og vil forårsake problemer
+        //Controller adder seg som listener på startup igjen i initialize()
+        Main.getInstance().clearListeners();
+        //Lagrer vha. SaveHandler
+        saveHandler.writeToFile(Main.getInstance());
+
+        Main.getInstance().addListener(this);
     }
 
 }
