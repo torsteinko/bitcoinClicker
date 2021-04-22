@@ -5,11 +5,13 @@ import java.nio.file.FileAlreadyExistsException;
 
 public class SaveHandler implements SaveFile {
 
+    String filepath = System.getProperty("user.dir");
+
     //Funksjon som tar inn eit Main objekt og skriver til fil
     public void writeToFile(Main main) {
         if (createNewDataFile()) {
             try {
-                FileOutputStream f = new FileOutputStream(("src/sample/data.ser"));
+                FileOutputStream f = new FileOutputStream((filepath + "data.ser"));
                 ObjectOutputStream o = new ObjectOutputStream(f);
 
                 o.writeObject(main);
@@ -29,7 +31,7 @@ public class SaveHandler implements SaveFile {
     //Funksjon som returnerer et Main objekt fra fil
     public Main readFromFile() {
         try {
-            FileInputStream f = new FileInputStream(("src/sample/data.ser"));
+            FileInputStream f = new FileInputStream((filepath + "data.ser"));
             ObjectInputStream o = new ObjectInputStream(f);
 
             Main main = (Main) o.readObject();
@@ -51,7 +53,7 @@ public class SaveHandler implements SaveFile {
 
     public boolean createNewDataFile() {
         try {
-            File f = new File("src/sample/data.ser");
+            File f = new File(filepath + "data.ser");
             f.createNewFile();
             return true;
         } catch (FileAlreadyExistsException e) {
